@@ -187,7 +187,7 @@ pub async fn process_course(courses: &Vec<Course>, attendances: &Vec<Attendance>
     }
 
     workbook.close()?;
-    info!("Successfully wrote report to {}", &filename);
+    info!("Successfully wrote reports to {}", &filename);
 
     Ok(())
 }

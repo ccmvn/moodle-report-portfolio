@@ -6,6 +6,8 @@ The GFN Lernplattform Scraper is a terminal-based web scraping tool built in Rus
 
 A key function of this tool is to sift through attendance records to pinpoint absences 🕰, providing an effective way to manage and track attendance throughout the training period.
 
+![Logo](./resources/preview.png)
+
 ## 🛠️ Build Requirements
 
 Before proceeding, make sure you have the following installed:

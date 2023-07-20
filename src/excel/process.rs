@@ -9,8 +9,6 @@ use xlsxwriter::prelude::{GridLines, WorksheetCol, WorksheetRow};
 use crate::common::tables::{Attendance, Cell, ClassbookEntry, Course};
 use crate::CONFIG;
 
-const HEALTH_REASON_ABSENCE: &str = "Keine Teilnahme am Unterricht aus gesundheitlichen Gründen";
-
 const GRIDLINE_SETTINGS: GridLines = GridLines::HideAllGridLines;
 const COLUMN_WIDTHS: [f32; 10] = [2.83, 4.33, 17.5, 2.5, 17.5, 0.55, 17.5, 0.64, 22.17, 7.33];
 
@@ -33,6 +31,13 @@ const NR: &str = "Nr.";
 const WEEK_FROM_TO: &str = "Woche vom bis";
 const TRAINING_LOCATION: &str = "Ort der Ausbildung:";
 const INSTRUCTOR: &str = "Ausbilder:";
+
+const NO_LESSON: &'static str = "Kein Unterricht";
+const HOLIDAY: &'static str = "Feiertag";
+const FREE_UPPERCASE: &'static str = "FREI";
+const FREE_LOWERCASE: &'static str = "Frei";
+const NO_LESSON_FREE: &'static str = "Unterrichtsfrei";
+const HEALTH_REASON_ABSENCE: &str = "Keine Teilnahme am Unterricht aus gesundheitlichen Gründen";
 
 const DAYS_AND_RANGES: &[(&str, (usize, usize, usize, usize))] = &[
     ("Montag", (3, 0, 13, 0)),
@@ -66,11 +71,11 @@ lazy_static! {
     };
 
     static ref ZERO_HOUR_KEYWORDS: Vec<&'static str> = vec![
-        "Kein Unterricht",
-        "Feiertag",
-        "FREI",
-        "Frei",
-        "Unterrichtsfrei",
+        NO_LESSON,
+        HOLIDAY,
+        FREE_UPPERCASE,
+        FREE_LOWERCASE,
+        NO_LESSON_FREE,
         HEALTH_REASON_ABSENCE
     ];
 

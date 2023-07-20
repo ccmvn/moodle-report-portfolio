@@ -71,9 +71,6 @@ lazy_static! {
         "FREI",
         "Frei",
         "Unterrichtsfrei",
-        "Urlaub",
-        "Urlaubstag",
-        "Urlaubstage",
         HEALTH_REASON_ABSENCE
     ];
 

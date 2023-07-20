@@ -50,8 +50,9 @@ async fn main() -> Result<(), String> {
         // Scrape the global attendance information
         let attendances = scrape_attendance(Arc::clone(&client)).await.map_err(|e| format!("Failed to scrape attendance: {}", e))?;
 
-        // Now you can pass it to scrape_courses
+        // Scrape the courses
         let courses = scrape_courses(Arc::clone(&client)).await;
+        // Process the courses
         let course_futures = courses.iter().map(|course| { process_course(course, &attendances) });
 
         // Wait for all courses to be processed

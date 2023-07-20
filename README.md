@@ -6,6 +6,20 @@ The GFN Lernplattform Scraper is a terminal-based web scraping tool built in Rus
 
 A key function of this tool is to sift through attendance records to pinpoint absences 🕰, providing an effective way to manage and track attendance throughout the training period.
 
+## 🛠️ Build Requirements
+
+Before proceeding, make sure you have the following installed:
+
+- LLVM and clang
+- Visual Studio (Windows users)
+
+Here's how to build on Windows:
+
+1. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/).
+2. Install [LLVM](https://llvm.org/builds/).
+3. Set the `LIBCLANG_PATH` environment variable as `C:\Program Files\LLVM\bin`.
+4. Run the build process.
+
 ## ⚙️ Core Functions
 
 The centerpiece of the GFN Lernplattform Scraper is the `main()` function. This function undertakes a sequence of tasks, in this order:

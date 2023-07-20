@@ -212,7 +212,7 @@ fn limit_time_range(time: &str) -> String {
         }
     }
 
-    time.to_string()
+    return time.to_string();
 }
 
 // Function to parse date and time from a string and return them as a tuple

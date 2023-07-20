@@ -1,6 +1,7 @@
 use std::error::Error;
 use std::sync::Arc;
 use lazy_static::lazy_static;
+use log::error;
 use regex::Regex;
 use reqwest::Client;
 use reqwest_cookie_store::CookieStoreMutex;
@@ -25,22 +26,21 @@ lazy_static! {
 
 pub async fn get_body(client: &Client, url: &str) -> Result<String, Box<dyn Error>> {
     let res = client.get(url).send().await.map_err(|err| {
-        eprintln!("Network Error: {}", err);
+        error!("Network Error: {}", err);
         Box::new(err) as Box<dyn Error>
     })?;
 
     if !res.status().is_success() {
-        eprintln!("Received an error response ({}): {}", res.status(), res.text().await?);
+        error!("Received an error response ({}): {}", res.status(), res.text().await?);
         return Err("Error response received".into());
     }
 
     let body = res.text().await.map_err(|err| {
-        eprintln!("Response Error: {}", err);
+        error!("Response Error: {}", err);
         Box::new(err) as Box<dyn Error>
     })?;
 
     let cleaned_body = RE_H5.replace_all(&body, ""); // H5-Elements are removed from the body
-
     Ok(cleaned_body.into_owned())
 }
 

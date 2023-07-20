@@ -30,7 +30,11 @@ const TRAINING_RECORD: &str = "Ausbildungsnachweis";
 const NR: &str = "Nr.";
 const WEEK_FROM_TO: &str = "Woche vom bis";
 const TRAINING_LOCATION: &str = "Ort der Ausbildung:";
-const INSTRUCTOR: &str = "Ausbilder:";
+
+const TRAINEE: &'static str = "Auszubildener";
+const INSTRUCTOR: &'static str = "Ausbilder";
+const LEGAL_REPRESENTATIVE: &'static str = "Gesetzlicher Vertreter";
+const OTHER_NOTES: &'static str = "Sonstige Sichtvermerke";
 
 const NO_LESSON: &'static str = "Kein Unterricht";
 const HOLIDAY: &'static str = "Feiertag";
@@ -39,33 +43,45 @@ const FREE_LOWERCASE: &'static str = "Frei";
 const NO_LESSON_FREE: &'static str = "Unterrichtsfrei";
 const HEALTH_REASON_ABSENCE: &str = "Keine Teilnahme am Unterricht aus gesundheitlichen Gründen";
 
+const MONDAY: &'static str = "Montag";
+const TUESDAY: &'static str = "Dienstag";
+const WEDNESDAY: &'static str = "Mittwoch";
+const THURSDAY: &'static str = "Donnerstag";
+const FRIDAY: &'static str = "Freitag";
+
+const MON: &'static str = "Mon";
+const TUE: &'static str = "Tue";
+const WED: &'static str = "Wed";
+const THU: &'static str = "Thu";
+const FRI: &'static str = "Fri";
+
 const DAYS_AND_RANGES: &[(&str, (usize, usize, usize, usize))] = &[
-    ("Montag", (3, 0, 13, 0)),
-    ("Dienstag", (14, 0, 24, 0)),
-    ("Mittwoch", (25, 0, 35, 0)),
-    ("Donnerstag", (36, 0, 46, 0)),
-    ("Freitag", (47, 0, 57, 0)),
+    (MONDAY, (3, 0, 13, 0)),
+    (TUESDAY, (14, 0, 24, 0)),
+    (WEDNESDAY, (25, 0, 35, 0)),
+    (THURSDAY, (36, 0, 46, 0)),
+    (FRIDAY, (47, 0, 57, 0)),
 ];
 
 lazy_static! {
     static ref WEEKDAY_TO_RANGE: HashMap<String, (usize, usize, usize, usize)> = {
         let mut m = HashMap::new();
-        m.insert("Mon".to_string(), (3, 1, 13, 8));
-        m.insert("Tue".to_string(), (14, 1, 24, 8));
-        m.insert("Wed".to_string(), (25, 1, 35, 8));
-        m.insert("Thu".to_string(), (36, 1, 46, 8));
-        m.insert("Fri".to_string(), (47, 1, 57, 8));
+        m.insert(MON.to_string(), (3, 1, 13, 8));
+        m.insert(TUE.to_string(), (14, 1, 24, 8));
+        m.insert(WED.to_string(), (25, 1, 35, 8));
+        m.insert(THU.to_string(), (36, 1, 46, 8));
+        m.insert(FRI.to_string(), (47, 1, 57, 8));
 
         return m;
     };
 
     static ref WEEKDAY_TO_ROW: HashMap<String, usize> = {
         let mut m = HashMap::new();
-        m.insert("Mon".to_string(), 13);
-        m.insert("Tue".to_string(), 24);
-        m.insert("Wed".to_string(), 35);
-        m.insert("Thu".to_string(), 46);
-        m.insert("Fri".to_string(), 57);
+        m.insert(MON.to_string(), 13);
+        m.insert(TUE.to_string(), 24);
+        m.insert(WED.to_string(), 35);
+        m.insert(THU.to_string(), 46);
+        m.insert(FRI.to_string(), 57);
 
         return m;
     };
@@ -80,10 +96,10 @@ lazy_static! {
     ];
 
     static ref ENTRIES: Vec<(usize, &'static str)> = vec![
-        (2, "Auszubildener"),
-        (4, "Ausbilder"),
-        (6, "Gesetzlicher Vertreter"),
-        (8, "Sonstige Sichtvermerke"),
+        (2, TRAINEE),
+        (4, INSTRUCTOR),
+        (6, LEGAL_REPRESENTATIVE),
+        (8, OTHER_NOTES),
     ];
 }
 
@@ -641,7 +657,7 @@ fn process_week(week_entries: &Vec<&ClassbookEntry>, week_number: u32, workbook:
         rotation: None,
     });
     worksheet.write_string(1, 4, CONFIG.get_location(), Some(&format))?;
-    worksheet.write_string(1, 6, INSTRUCTOR, Some(&format))?;
+    worksheet.write_string(1, 6, &*(INSTRUCTOR.to_owned() + ":"), Some(&format))?;
     worksheet.write_string(1, 8, CONFIG.get_educator_name(), Some(&format))?;
 
     let format = create_format_from_props(FormatProps {

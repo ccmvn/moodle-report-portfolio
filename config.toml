@@ -1,0 +1,18 @@
+[account]
+user_name = ""
+password = ""
+
+[company]
+educator_name = ""
+location = "Musterstadt"
+
+[signature]
+signature = "Mustermann"
+font_name = "Pacifico"
+font_size = 20
+
+[website]
+base_url = "https://lernplattform.gfn.de"
+
+[options]
+test_mode = false

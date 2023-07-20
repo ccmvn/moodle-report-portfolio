@@ -1,0 +1,23 @@
+[package]
+name = "moodle-report-portfolio"
+version = "0.1.0"
+edition = "2021"
+authors = ["Marvin Juraschka <info@ccmvn.co>"] # https://github.com/ccmvn
+
+[dependencies]
+reqwest = { version = "0.11.18", features = ["json", "gzip", "cookies"] }
+reqwest_cookie_store = "0.6.0"
+tokio = { version = "1.0", features = ["full"] }
+scraper = "0.17.1"
+toml = "0.7.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_derive = "1.0"
+log = "0.4.17"
+env_logger = "0.10.0"
+lazy_static = "1.4.0"
+regex = "1.5.4"
+futures = "0.3.28"
+chrono = "0.4.19"
+xlsxwriter = "0.6.0"
+html-escape = "0.2.13"
+linked_hash_set = "0.1.4"

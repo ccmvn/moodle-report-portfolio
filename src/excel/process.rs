@@ -399,7 +399,14 @@ fn write_activities(worksheet: &mut Worksheet, week_entries: &Vec<&ClassbookEntr
 
         let activities_str = if let Some(entry) = entry {
             let activities_vec: Vec<String> = entry.activities.clone().into_iter().collect();
-            activities_vec.join(", ") + " "
+            let activities_str = activities_vec.into_iter()
+                .map(|activity|
+                    if activity.ends_with('?') || activity.ends_with('!') { activity + " " }
+                    else { activity + ", " }
+                )
+                .collect::<String>();
+
+            activities_str.trim_end_matches(", ").to_string() // Remove trailing comma and whitespace
         } else {
             "".to_string()
         };

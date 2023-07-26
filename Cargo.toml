@@ -2,7 +2,8 @@
 name = "moodle-report-portfolio"
 version = "0.1.0"
 edition = "2021"
-authors = ["Marvin Juraschka <info@ccmvn.co>"] # https://github.com/ccmvn
+authors = ["Marvin Juraschka <info@ccmvn.co>"]
+repository = "https://github.com/ccmvn/moodle-report-portfolio"
 
 [dependencies]
 reqwest = { version = "0.11.18", features = ["json", "gzip", "cookies"] }
